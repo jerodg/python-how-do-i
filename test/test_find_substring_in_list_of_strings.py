@@ -18,11 +18,12 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
-from src.python.find_substring_in_list_of_strings import method_0
+from find_substring_in_list_of_strings import method_0
 import faker
 from random import choice
 from pytest import fixture
-from src.python.utils import bprint, tprint
+from print_helpers import bprint, tprint
+from time import perf_counter_ns
 
 
 @fixture()
@@ -38,7 +39,13 @@ class TestFindSubstringInListOfStrings:
     def test_method_0(self, test_data):
         bprint('Find Substring Method 0, Using Any()')
         td, key = test_data
+
+        st = perf_counter_ns()
         result = method_0(td, key)
-        tprint(result)
+        et = perf_counter_ns()
 
         assert result is True
+
+        tprint(result)
+
+        bprint(f'-> Completed in {(et - st):f} nano-seconds.')

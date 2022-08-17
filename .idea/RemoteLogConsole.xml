@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteLogConsole">
+    <option name="sources">
+      <list>
+        <LogSource>
+          <option name="id" value="4e842545-7327-45e7-80b5-c79478c49d3d" />
+          <option name="name" value="Python" />
+        </LogSource>
+      </list>
+    </option>
+  </component>
+</project>

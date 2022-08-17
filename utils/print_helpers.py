@@ -29,7 +29,7 @@ def bprint(message) -> NoReturn:
 
     Returns:
         (NoReturn)"""
-    msg = f'\n▃▅▇█▓▒░۩۞۩ {message.center(58)} ۩۞۩░▒▓█▇▅▃\n'
+    msg = f'\n▃▅▇█▓▒░۩۞۩ {message.center(58)} ۩۞۩░▒▓█▇▅▃'
     print(msg)
 
 
@@ -45,12 +45,13 @@ def tprint(data: Any, top: Optional[int] = None) -> NoReturn:
     if type(data) is Iterable:
         if top:
             top_hdr = f'Top {top} ' if top else ''
-            print(f'\n{top_hdr}Result{"s" if len(data) > 1 else ""}: {len(data)}')
+            print(f'{top_hdr}Result{"s" if len(data) > 1 else ""}: {len(data)}')
             print(*data[:top], sep='\n')
         else:
+            print(f'Result{"s" if len(data) > 1 else ""}:')
             print(*data, sep='\n')
     else:
-        print(data)
+        print(f'Result:\n-> {data}')
 
 
 if __name__ == '__main__':

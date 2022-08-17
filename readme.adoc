@@ -4,7 +4,7 @@
 :badge-style: plastic
 
 :description: Code project README template.
-:doctype: article
+:doctype: book
 :docdate: 21 July 2022
 :docs-link: https://github.com/jerodg/templates/docs
 

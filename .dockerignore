@@ -1,4 +1,4 @@
-**/.dockerignore
-**/.gitignore
+.dockerignore
+.gitignore
 **/*.yml
 **/*.md
