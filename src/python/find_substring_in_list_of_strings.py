@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
-"""
-How Do I -> Python -> Find substring in list of strings?
+#!/usr/bin/env python
+""" How Do I -> Python -> Find substring in list of strings?
 
 Copyright ©2022 Jerod Gawne <https://github.com/jerodg/>
 
@@ -17,55 +16,68 @@ SSPL for more details.
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
-If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
-"""
-xml = [y for y in (x.strip() for x in __doc__.splitlines()) if y]
+If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
+from typing import List
 
 
-class FindSubstring(object):
+def method_0(data: List[str], substr: str) -> bool:
+    """Method 0: Using the any() method
 
-    def __int__(self, data: list, locator: str):
-        self.data: list = data
-        self.locator: str = locator
+    Return True if any element of the iterable is true, otherwise, False.
 
-    def method_0(self, locator: str) -> bool:
-        """
-        Method #0: Using the any() method
+    Notes:
+        Does not provide the location of the substr.
 
-        :param locator: (str)
+    Args:
+        data (List[str]):
+        substr: str
 
-        :return: boolean (bool)
-        """
-        return any(locator in _ for _ in self.data)
+    Returns:
+        bool (bool):
 
-    def method_1(self, locator: str) -> bool:
-        """
-        Method #1: Using the find() method
+    References:
+        https://docs.python.org/3/library/functions.html?highlight=any#any"""
 
-        :param locator: (str)
+    return any(substr in x for x in data)
 
-        :return: boolean (bool)
-        """
-        for i in self.data:
-            if i.find(locator) != -1:
-                return True
 
-    def method_2(self, locator: str) -> bool:
-        """
-        Method #2: Using the join() method
-
-        :param locator: (str)
-
-        :return: boolean (bool)
-        """
-        return locator in '\t'.join(self.data)
-
-    def method_3(self, locator: str) -> bool:
-        """
-        Method #4: Using a list comprehension
-
-        :param locator: (str)
-
-        :return: boolean (bool)
-        """
-        return True if [x for x in self.data if x.find(locator) != -1] else False
+#
+# def method_1(data: List[str], substr: str) -> bool:
+#     """ Method #1: Using the find() method with a for-loop
+#
+#     Return the lowest (first) index in the string where substring sub is found within the slice s[start:end].
+#     Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
+#
+#     :param data: (List[str])
+#     :param substr: str
+#     :return: (bool)"""
+#     for i, row in data:
+#         row.find(substr)
+#
+#         if row.find(substr) != -1:  # find returns ?
+#             return True
+#
+#
+# def method_1a(data: List[str], substr: str) -> bool:
+#     """ Method #1a: Using the find() method with a list comprehension
+#
+#     :param data: (List[str])
+#     :param substr: str
+#     :return: (bool)"""
+#     return True if [x for x in data if x.find(substr) != -1] else False
+#
+#
+# def method_2(data: List[str], substr: str) -> bool:
+#     """ Method #2: Using the join() method
+#
+#     :return: boolean (bool)"""
+#     return substr in '\t'.join(data)
+#
+#
+# def method_4(data: List[str], substr: str) -> bool:
+#     """ Method #4: Using a for-loop
+#
+#     :return: boolean (bool)"""
+#     for x in data:
+#         if substr in x:
+#             return True
