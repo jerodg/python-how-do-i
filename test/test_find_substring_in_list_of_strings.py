@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-How Do I -> Python -> Test -> Find substring in list of strings?
+""" How Do I -> Python -> Test -> Find substring in list of strings?
 
 Copyright ©2022 Jerod Gawne <https://github.com/jerodg/>
 
@@ -18,12 +17,14 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
-from find_substring_in_list_of_strings import method_0
-import faker
 from random import choice
-from pytest import fixture
-from print_helpers import bprint, tprint
 from time import perf_counter_ns
+
+import faker
+from pytest import fixture
+
+from find_substring_in_list_of_strings import method_0, method_1, method_1a, method_2, method_3
+from print_helpers import bprint, tprint
 
 
 @fixture()
@@ -37,7 +38,7 @@ def test_data() -> tuple:
 
 class TestFindSubstringInListOfStrings:
     def test_method_0(self, test_data):
-        bprint('Find Substring Method 0, Using Any()')
+        bprint('Find Substring Method 0, Using any()')
         td, key = test_data
 
         st = perf_counter_ns()
@@ -48,4 +49,74 @@ class TestFindSubstringInListOfStrings:
 
         tprint(result)
 
-        bprint(f'-> Completed in {(et - st):f} nano-seconds.')
+        bprint(f'Completed in {(et - st):f} nano-seconds.')
+
+    def test_method_1(self, test_data):
+        bprint('Find Substring Method 1, Using find() with a for-loop')
+        td, key = test_data
+
+        st = perf_counter_ns()
+        result = method_1(td, key)
+        et = perf_counter_ns()
+
+        assert result is True
+
+        tprint(result)
+
+        bprint(f'Completed in {(et - st):f} nano-seconds.')
+
+    def test_method_1a(self, test_data):
+        bprint('Find Substring Method 1a, Using find() with a comprehension')
+        td, key = test_data
+
+        st = perf_counter_ns()
+        result = method_1a(td, key)
+        et = perf_counter_ns()
+
+        assert result is True
+
+        tprint(result)
+
+        bprint(f'Completed in {(et - st):f} nano-seconds.')
+
+    def test_method_2(self, test_data):
+        bprint('Find Substring Method 2, Using join()')
+        td, key = test_data
+
+        st = perf_counter_ns()
+        result = method_2(td, key)
+        et = perf_counter_ns()
+
+        assert result is True
+
+        tprint(result)
+
+        bprint(f'Completed in {(et - st):f} nano-seconds.')
+
+    def test_method_3(self, test_data):
+        bprint('Find Substring Method 3, Using a for-loop')
+        td, key = test_data
+
+        st = perf_counter_ns()
+        result = method_3(td, key)
+        et = perf_counter_ns()
+
+        assert result is True
+
+        tprint(result)
+
+        bprint(f'Completed in {(et - st):f} nano-seconds.')
+
+    def test_method_4(self, test_data):
+        bprint('Find Substring Method 4, Using a comprehension')
+        td, key = test_data
+
+        st = perf_counter_ns()
+        result = method_3(td, key)
+        et = perf_counter_ns()
+
+        assert result is True
+
+        tprint(result)
+
+        bprint(f'Completed in {(et - st):f} nano-seconds.')

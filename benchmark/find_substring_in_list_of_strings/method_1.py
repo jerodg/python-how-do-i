@@ -1,1 +1,5 @@
-any(srch in x for x in td)
+"""
+for row in data:
+    if row.find(substr) != -1:  # Returns -1 if not found
+        return True
+"""

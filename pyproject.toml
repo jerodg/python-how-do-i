@@ -8,6 +8,8 @@ license = "SSPL"
 [tool.poetry.dependencies]
 python = "^3.10"
 humanize = "^4.3.0"
+Faker = "^14.1.0"
+fastero = "^0.2.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"

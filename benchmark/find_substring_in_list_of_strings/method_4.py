@@ -1,1 +1,3 @@
-any(srch in x for x in td)
+"""
+return True if [x for x in data if substr in x] else False
+"""

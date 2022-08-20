@@ -21,7 +21,7 @@ from typing import List
 
 
 def method_0(data: List[str], substr: str) -> bool:
-    """Method 0: Using the any() method
+    """ Method 0: Using the any() method
 
     Return True if any element of the iterable is true, otherwise, False.
 
@@ -33,51 +33,97 @@ def method_0(data: List[str], substr: str) -> bool:
         substr: str
 
     Returns:
-        bool (bool):
+        boolean (bool):
 
     References:
         https://docs.python.org/3/library/functions.html?highlight=any#any"""
-
     return any(substr in x for x in data)
 
 
-#
-# def method_1(data: List[str], substr: str) -> bool:
-#     """ Method #1: Using the find() method with a for-loop
-#
-#     Return the lowest (first) index in the string where substring sub is found within the slice s[start:end].
-#     Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
-#
-#     :param data: (List[str])
-#     :param substr: str
-#     :return: (bool)"""
-#     for i, row in data:
-#         row.find(substr)
-#
-#         if row.find(substr) != -1:  # find returns ?
-#             return True
-#
-#
-# def method_1a(data: List[str], substr: str) -> bool:
-#     """ Method #1a: Using the find() method with a list comprehension
-#
-#     :param data: (List[str])
-#     :param substr: str
-#     :return: (bool)"""
-#     return True if [x for x in data if x.find(substr) != -1] else False
-#
-#
-# def method_2(data: List[str], substr: str) -> bool:
-#     """ Method #2: Using the join() method
-#
-#     :return: boolean (bool)"""
-#     return substr in '\t'.join(data)
-#
-#
-# def method_4(data: List[str], substr: str) -> bool:
-#     """ Method #4: Using a for-loop
-#
-#     :return: boolean (bool)"""
-#     for x in data:
-#         if substr in x:
-#             return True
+def method_1(data: List[str], substr: str) -> bool:
+    """ Method #1: Using the find() method with a for-loop
+
+    Return the lowest (first) index in the string where substring sub is found within the slice s[start:end].
+    Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
+
+
+    Args:
+        data (List[str]):
+        substr (str):
+
+    Returns:
+        boolean (bool)
+
+    References:
+        https://docs.python.org/3/library/stdtypes.html?highlight=find#str.find"""
+    for row in data:
+        if row.find(substr) != -1:  # Returns -1 if not found
+            return True
+
+
+def method_1a(data: List[str], substr: str) -> bool:
+    """ Method #1a: Using the find() method with a list comprehension
+
+    Args:
+        data (List[str]):
+        substr (str):
+
+    Returns:
+        boolean (bool)
+
+    References:
+        https://docs.python.org/3/library/stdtypes.html?highlight=find#str.find"""
+    return True if [x for x in data if x.find(substr) != -1] else False
+
+
+def method_2(data: List[str], substr: str) -> bool:
+    """ Method #2: Using the join() method
+
+    Args:
+        data (List[str]):
+        substr (str):
+
+    Returns:
+        boolean (bool)
+
+    References:
+        https://docs.python.org/3/library/stdtypes.html?highlight=join#str.join"""
+    return substr in '\t'.join(data)
+
+
+def method_3(data: List[str], substr: str) -> bool:
+    """ Method #3: Using a for-loop
+
+    Current benchmarks show this is the fastest method.
+
+    Args:
+        data (List[str]):
+        substr (str):
+
+    Returns:
+        boolean (bool)
+
+    References:
+        https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements"""
+    for x in data:
+        if substr in x:
+            return True
+
+
+def method_4(data: List[str], substr: str) -> bool:
+    """ Method #3: Using a list comprehension
+
+    Args:
+        data (List[str]):
+        substr (str):
+
+    Returns:
+        boolean (bool)
+
+    References:
+        https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements"""
+    return True if [x for x in data if substr in x] else False
+
+
+if __name__ == "__main__":
+    print(__doc__)

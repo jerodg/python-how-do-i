@@ -1,1 +1,3 @@
-any(srch in x for x in td)
+"""
+return substr in '\t'.join(data)
+"""

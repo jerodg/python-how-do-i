@@ -1,1 +1,5 @@
-any(srch in x for x in td)
+"""
+for x in data:
+    if substr in x:
+        return True
+"""
