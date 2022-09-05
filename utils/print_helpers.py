@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """ How Do I -> Python -> Utils
 
 Copyright © 2019-2022 Jerod Gawne <https://github.com/jerodg/>
@@ -18,7 +18,7 @@ copies or substantial portions of the Software.
 
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
-from typing import Any, NoReturn, Optional, Union, Iterable
+from typing import Any, Iterable, NoReturn, Optional
 
 
 def bprint(message) -> NoReturn:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" How Do I -> Python -> Init?
+""" Python -> How Do I -> Find Sub-String In String
 
 Copyright ©2022 Jerod Gawne <https://github.com/jerodg/>
 

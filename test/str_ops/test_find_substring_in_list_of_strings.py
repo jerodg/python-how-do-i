@@ -17,14 +17,16 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
+import subprocess
+from os.path import realpath
 from random import choice
 from time import perf_counter_ns
 
 import faker
 from pytest import fixture
 
-from find_substring_in_list_of_strings import method_0, method_1, method_1a, method_2, method_3
 from print_helpers import bprint, tprint
+from src.str_ops.find_substring_in_list_of_strings import method_0, method_1, method_1a, method_2, method_3
 
 
 @fixture()
@@ -65,7 +67,7 @@ class TestFindSubstringInListOfStrings:
 
         bprint(f'Completed in {(et - st):f} nano-seconds.')
 
-    def test_method_1a(self, test_data):
+    def test_method_2(self, test_data):
         bprint('Find Substring Method 1a, Using find() with a comprehension')
         td, key = test_data
 
@@ -79,7 +81,7 @@ class TestFindSubstringInListOfStrings:
 
         bprint(f'Completed in {(et - st):f} nano-seconds.')
 
-    def test_method_2(self, test_data):
+    def test_method_3(self, test_data):
         bprint('Find Substring Method 2, Using join()')
         td, key = test_data
 
@@ -93,7 +95,7 @@ class TestFindSubstringInListOfStrings:
 
         bprint(f'Completed in {(et - st):f} nano-seconds.')
 
-    def test_method_3(self, test_data):
+    def test_method_4(self, test_data):
         bprint('Find Substring Method 3, Using a for-loop')
         td, key = test_data
 
@@ -107,7 +109,7 @@ class TestFindSubstringInListOfStrings:
 
         bprint(f'Completed in {(et - st):f} nano-seconds.')
 
-    def test_method_4(self, test_data):
+    def test_method_5(self, test_data):
         bprint('Find Substring Method 4, Using a comprehension')
         td, key = test_data
 
@@ -120,3 +122,15 @@ class TestFindSubstringInListOfStrings:
         tprint(result)
 
         bprint(f'Completed in {(et - st):f} nano-seconds.')
+
+    def test_benchmark(self):
+
+        proc = subprocess.Popen(realpath('../../bench/str_ops/find_substring_in_list_of_strings'), stdout=subprocess.PIPE)
+
+        try:
+            outs, errs = proc.communicate(timeout=15)
+            print(outs)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            outs, errs = proc.communicate()
+            print(outs)

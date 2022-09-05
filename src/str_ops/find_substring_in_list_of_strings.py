@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """ How Do I -> Python -> Find substring in list of strings?
 
 Copyright ©2022 Jerod Gawne <https://github.com/jerodg/>
@@ -61,7 +61,7 @@ def method_1(data: List[str], substr: str) -> bool:
             return True
 
 
-def method_1a(data: List[str], substr: str) -> bool:
+def method_2(data: List[str], substr: str) -> bool:
     """ Method #1a: Using the find() method with a list comprehension
 
     Args:
@@ -76,7 +76,7 @@ def method_1a(data: List[str], substr: str) -> bool:
     return True if [x for x in data if x.find(substr) != -1] else False
 
 
-def method_2(data: List[str], substr: str) -> bool:
+def method3(data: List[str], substr: str) -> bool:
     """ Method #2: Using the join() method
 
     Args:
@@ -91,10 +91,8 @@ def method_2(data: List[str], substr: str) -> bool:
     return substr in '\t'.join(data)
 
 
-def method_3(data: List[str], substr: str) -> bool:
+def method_4(data: List[str], substr: str) -> bool:
     """ Method #3: Using a for-loop
-
-    Current benchmarks show this is the fastest method.
 
     Args:
         data (List[str]):
@@ -105,12 +103,12 @@ def method_3(data: List[str], substr: str) -> bool:
 
     References:
         https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements"""
-    for x in data:
-        if substr in x:
+    for row in data:
+        if substr in row:
             return True
 
 
-def method_4(data: List[str], substr: str) -> bool:
+def method_5(data: List[str], substr: str) -> bool:
     """ Method #3: Using a list comprehension
 
     Args:
