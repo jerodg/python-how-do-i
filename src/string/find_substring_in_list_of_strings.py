@@ -76,7 +76,7 @@ def method_2(data: List[str], substr: str) -> bool:
     return True if [x for x in data if x.find(substr) != -1] else False
 
 
-def method3(data: List[str], substr: str) -> bool:
+def method_3(data: List[str], substr: str) -> bool:
     """ Method #2: Using the join() method
 
     Args:

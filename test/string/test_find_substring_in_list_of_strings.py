@@ -26,7 +26,7 @@ import faker
 from pytest import fixture
 
 from print_helpers import bprint, tprint
-from src.str_ops.find_substring_in_list_of_strings import method_0, method_1, method_1a, method_2, method_3
+from src.string.find_substring_in_list_of_strings import method_0, method_1, method_2, method_3, method_4, method_5
 
 
 @fixture()
@@ -68,21 +68,7 @@ class TestFindSubstringInListOfStrings:
         bprint(f'Completed in {(et - st):f} nano-seconds.')
 
     def test_method_2(self, test_data):
-        bprint('Find Substring Method 1a, Using find() with a comprehension')
-        td, key = test_data
-
-        st = perf_counter_ns()
-        result = method_1a(td, key)
-        et = perf_counter_ns()
-
-        assert result is True
-
-        tprint(result)
-
-        bprint(f'Completed in {(et - st):f} nano-seconds.')
-
-    def test_method_3(self, test_data):
-        bprint('Find Substring Method 2, Using join()')
+        bprint('Find Substring Method 2, Using find() with a comprehension')
         td, key = test_data
 
         st = perf_counter_ns()
@@ -95,8 +81,8 @@ class TestFindSubstringInListOfStrings:
 
         bprint(f'Completed in {(et - st):f} nano-seconds.')
 
-    def test_method_4(self, test_data):
-        bprint('Find Substring Method 3, Using a for-loop')
+    def test_method_3(self, test_data):
+        bprint('Find Substring Method 3, Using join()')
         td, key = test_data
 
         st = perf_counter_ns()
@@ -109,12 +95,26 @@ class TestFindSubstringInListOfStrings:
 
         bprint(f'Completed in {(et - st):f} nano-seconds.')
 
-    def test_method_5(self, test_data):
-        bprint('Find Substring Method 4, Using a comprehension')
+    def test_method_4(self, test_data):
+        bprint('Find Substring Method 4, Using a for-loop')
         td, key = test_data
 
         st = perf_counter_ns()
-        result = method_3(td, key)
+        result = method_4(td, key)
+        et = perf_counter_ns()
+
+        assert result is True
+
+        tprint(result)
+
+        bprint(f'Completed in {(et - st):f} nano-seconds.')
+
+    def test_method_5(self, test_data):
+        bprint('Find Substring Method 5, Using a comprehension')
+        td, key = test_data
+
+        st = perf_counter_ns()
+        result = method_5(td, key)
         et = perf_counter_ns()
 
         assert result is True
@@ -125,7 +125,7 @@ class TestFindSubstringInListOfStrings:
 
     def test_benchmark(self):
 
-        proc = subprocess.Popen(realpath('../../bench/str_ops/find_substring_in_list_of_strings'), stdout=subprocess.PIPE)
+        proc = subprocess.Popen(realpath('../../bench/string/find_substring_in_list_of_strings'), stdout=subprocess.PIPE)
 
         try:
             outs, errs = proc.communicate(timeout=15)
