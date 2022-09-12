@@ -22,37 +22,37 @@ from typing import Any, Iterable, NoReturn, Optional
 
 
 def bprint(message) -> NoReturn:
-    """Banner Print
+	"""Banner Print
 
-    Args:
-        message: (str)
+	Args:
+		message: (str)
 
-    Returns:
-        (NoReturn)"""
-    msg = f'\n▃▅▇█▓▒░۩۞۩ {message.center(58)} ۩۞۩░▒▓█▇▅▃'
-    print(msg)
+	Returns:
+		(NoReturn)"""
+	msg = f'\n▃▅▇█▓▒░۩۞۩ {message.center(58)} ۩۞۩░▒▓█▇▅▃'
+	print(msg)
 
 
 def tprint(data: Any, top: Optional[int] = None) -> NoReturn:
-    """Test Print
+	"""Test Print
 
-    Args:
-        data: (Any)
-        top: (int)
+	Args:
+		data: (Any)
+		top: (int)
 
-    Returns:
-        (NoReturn)"""
-    if type(data) is Iterable:
-        if top:
-            top_hdr = f'Top {top} ' if top else ''
-            print(f'{top_hdr}Result{"s" if len(data) > 1 else ""}: {len(data)}')
-            print(*data[:top], sep='\n')
-        else:
-            print(f'Result{"s" if len(data) > 1 else ""}:')
-            print(*data, sep='\n')
-    else:
-        print(f'Result:\n-> {data}')
+	Returns:
+		(NoReturn)"""
+	if type(data) is Iterable:
+		if top:
+			top_hdr = f'Top {top} ' if top else ''
+			print(f'{top_hdr}Result{"s" if len(data) > 1 else ""}: {len(data)}')
+			print(*data[:top], sep='\n')
+		else:
+			print(f'Result{"s" if len(data) > 1 else ""}:')
+			print(*data, sep='\n')
+	else:
+		print(f'Result:\n-> {data}')
 
 
 if __name__ == '__main__':
-    print(__doc__)
+	print(__doc__)

@@ -21,107 +21,107 @@ from typing import List
 
 
 def method_0(data: List[str], substr: str) -> bool:
-    """ Method 0: Using the any() method
+	""" Method 0: Using the any() method
 
-    Return True if any element of the iterable is true, otherwise, False.
+	Return True if any element of the iterable is true, otherwise, False.
 
-    Notes:
-        Does not provide the location of the substr.
+	Notes:
+		Does not provide the location of the substr.
 
-    Args:
-        data (List[str]):
-        substr: str
+	Args:
+		data (List[str]):
+		substr: str
 
-    Returns:
-        boolean (bool):
+	Returns:
+		boolean (bool):
 
-    References:
-        https://docs.python.org/3/library/functions.html?highlight=any#any"""
-    return any(substr in x for x in data)
+	References:
+		https://docs.python.org/3/library/functions.html?highlight=any#any"""
+	return any(substr in x for x in data)
 
 
 def method_1(data: List[str], substr: str) -> bool:
-    """ Method #1: Using the find() method with a for-loop
+	""" Method #1: Using the find() method with a for-loop
 
-    Return the lowest (first) index in the string where substring sub is found within the slice s[start:end].
-    Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
+	Return the lowest (first) index in the string where substring sub is found within the slice s[start:end].
+	Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
 
 
-    Args:
-        data (List[str]):
-        substr (str):
+	Args:
+		data (List[str]):
+		substr (str):
 
-    Returns:
-        boolean (bool)
+	Returns:
+		boolean (bool)
 
-    References:
-        https://docs.python.org/3/library/stdtypes.html?highlight=find#str.find"""
-    for row in data:
-        if row.find(substr) != -1:  # Returns -1 if not found
-            return True
+	References:
+		https://docs.python.org/3/library/stdtypes.html?highlight=find#str.find"""
+	for row in data:
+		if row.find(substr) != -1:  # Returns -1 if not found
+			return True
 
 
 def method_2(data: List[str], substr: str) -> bool:
-    """ Method #1a: Using the find() method with a list comprehension
+	""" Method #1a: Using the find() method with a list comprehension
 
-    Args:
-        data (List[str]):
-        substr (str):
+	Args:
+		data (List[str]):
+		substr (str):
 
-    Returns:
-        boolean (bool)
+	Returns:
+		boolean (bool)
 
-    References:
-        https://docs.python.org/3/library/stdtypes.html?highlight=find#str.find"""
-    return True if [x for x in data if x.find(substr) != -1] else False
+	References:
+		https://docs.python.org/3/library/stdtypes.html?highlight=find#str.find"""
+	return True if [x for x in data if x.find(substr) != -1] else False
 
 
 def method_3(data: List[str], substr: str) -> bool:
-    """ Method #2: Using the join() method
+	""" Method #2: Using the join() method
 
-    Args:
-        data (List[str]):
-        substr (str):
+	Args:
+		data (List[str]):
+		substr (str):
 
-    Returns:
-        boolean (bool)
+	Returns:
+		boolean (bool)
 
-    References:
-        https://docs.python.org/3/library/stdtypes.html?highlight=join#str.join"""
-    return substr in '\t'.join(data)
+	References:
+		https://docs.python.org/3/library/stdtypes.html?highlight=join#str.join"""
+	return substr in '\t'.join(data)
 
 
 def method_4(data: List[str], substr: str) -> bool:
-    """ Method #3: Using a for-loop
+	""" Method #3: Using a for-loop
 
-    Args:
-        data (List[str]):
-        substr (str):
+	Args:
+		data (List[str]):
+		substr (str):
 
-    Returns:
-        boolean (bool)
+	Returns:
+		boolean (bool)
 
-    References:
-        https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements"""
-    for row in data:
-        if substr in row:
-            return True
+	References:
+		https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements"""
+	for row in data:
+		if substr in row:
+			return True
 
 
 def method_5(data: List[str], substr: str) -> bool:
-    """ Method #3: Using a list comprehension
+	""" Method #3: Using a list comprehension
 
-    Args:
-        data (List[str]):
-        substr (str):
+	Args:
+		data (List[str]):
+		substr (str):
 
-    Returns:
-        boolean (bool)
+	Returns:
+		boolean (bool)
 
-    References:
-        https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements"""
-    return True if [x for x in data if substr in x] else False
+	References:
+		https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements"""
+	return True if [x for x in data if substr in x] else False
 
 
 if __name__ == "__main__":
-    print(__doc__)
+	print(__doc__)
