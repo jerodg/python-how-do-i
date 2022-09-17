@@ -22,42 +22,42 @@ from typing import List
 
 
 def method_0(arr: List[dict]) -> list:
-	"""Method 0: Using Chain itertools
+    """Method 0: Using Chain itertools
 
-	Args:
-		arr (List[dict]):
+    Args:
+            arr (List[dict]):
 
-	Returns:
-		(list)"""
-	return list(set(chain.from_iterable(sub.keys() for sub in arr)))
+    Returns:
+            (list)"""
+    return list(set(chain.from_iterable(sub.keys() for sub in arr)))
 
 
 def method_1(arr: List[dict]) -> list:
-	"""Method 1: Using list/dict Comprehension
+    """Method 1: Using list/dict Comprehension
 
-	Args:
-		arr (List[dict]):
+    Args:
+            arr (List[dict]):
 
-	Returns:
-		(list)"""
-	return list(set(val for dic in arr for val in dic.keys()))
+    Returns:
+            (list)"""
+    return list(set(val for dic in arr for val in dic.keys()))
 
 
 def method_2(arr: List[dict]) -> list:
-	"""Method 2: Using keys(),extend(),list() and set() methods
+    """Method 2: Using keys(),extend(),list() and set() methods
 
-	Args:
-		arr (List[dict]):
+    Args:
+            arr (List[dict]):
 
-	Returns:
-		(list)"""
-	new_list = []
+    Returns:
+            (list)"""
+    new_list = []
 
-	for i in arr:
-		new_list.extend(list(i.keys()))
+    for i in arr:
+        new_list.extend(list(i.keys()))
 
-	return list(set(new_list))
+    return list(set(new_list))
 
 
 if __name__ == "__main__":
-	print(__doc__)
+    print(__doc__)

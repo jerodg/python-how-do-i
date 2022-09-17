@@ -28,25 +28,30 @@ from src.dict.find_unique_keys_from_list_of_dicts import method_0
 
 @fixture()
 def test_data() -> List[dict]:
-	return [{'mk1': 'mk1-stuff', 'mk2': 'mk2-stuff', 'mk3': 'N/A'},
-	        {'mk4': 'mk4-stuff', 'mk5': 'mk5-stuff', 'mk6': 100837363}]
+    return [
+        {"mk1": "mk1-stuff", "mk2": "mk2-stuff", "mk3": "N/A"},
+        {"mk4": "mk4-stuff", "mk5": "mk5-stuff", "mk6": 100837363},
+    ]
 
 
 class TestFindUniqueKeysFromListOfDicts:
+    def test_method_0(self, test_data):
+        bprint("Find Unique Keys Method 0, Using Chain itertools")
+        st = perf_counter_ns()
+        result = method_0(test_data)
+        et = perf_counter_ns()
 
-	def test_method_0(self, test_data):
-		st = perf_counter_ns()
-		result = method_0(test_data)
-		et = perf_counter_ns()
+        result.sort()
 
-		assert result is True
+        assert result == ["mk1", "mk2", "mk3", "mk4", "mk5", "mk6"]
 
-		tprint(result)
+        tprint(result)
 
-		bprint(f'Completed in {(et - st):f} nano-seconds.')
+        bprint(f"Completed in {(et - st):f} nano-seconds.")
+
 
 # def test_method_1(self, test_data):
-# 	bprint('Find Unique Keys Method 1, Using list/test_dict Comprehension')
+# 	bprint('Find Unique Keys Method 1, Using list/dict Comprehension')
 # 	td, key = test_data
 #
 # 	st = perf_counter_ns()
