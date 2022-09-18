@@ -1,3 +1,3 @@
 """
-any(srch in x for x in td)
+list(set(chain.from_iterable(sub.keys() for sub in arr)))
 """

@@ -1,5 +1,3 @@
 """
-for row in data:
-    if row.find(substr) != -1:  # Returns -1 if not found
-        return True
+list(set(val for dic in arr for val in dic.keys()))
 """

@@ -17,13 +17,15 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
+import subprocess
+from os.path import realpath
 from time import perf_counter_ns
 from typing import List
 
 from pytest import fixture
 
 from print_helpers import bprint, tprint
-from src.dict.find_unique_keys_from_list_of_dicts import method_0
+from src.dict.find_unique_keys_from_list_of_dicts import method_0, method_1, method_2
 
 
 @fixture()
@@ -37,6 +39,7 @@ def test_data() -> List[dict]:
 class TestFindUniqueKeysFromListOfDicts:
     def test_method_0(self, test_data):
         bprint("Find Unique Keys Method 0, Using Chain itertools")
+
         st = perf_counter_ns()
         result = method_0(test_data)
         et = perf_counter_ns()
@@ -49,43 +52,46 @@ class TestFindUniqueKeysFromListOfDicts:
 
         bprint(f"Completed in {(et - st):f} nano-seconds.")
 
+    def test_method_1(self, test_data):
+        bprint("Find Unique Keys Method 1, Using list/dict Comprehension")
 
-# def test_method_1(self, test_data):
-# 	bprint('Find Unique Keys Method 1, Using list/dict Comprehension')
-# 	td, key = test_data
-#
-# 	st = perf_counter_ns()
-# 	result = method_1(td, key)
-# 	et = perf_counter_ns()
-#
-# 	assert result is True
-#
-# 	tprint(result)
-#
-# 	bprint(f'Completed in {(et - st):f} nano-seconds.')
-#
-# def test_method_2(self, test_data):
-# 	bprint('Find Unique Keys Method 2, Using keys(),extend(),list() and set() methods')
-# 	td, key = test_data
-#
-# 	st = perf_counter_ns()
-# 	result = method_2(td, key)
-# 	et = perf_counter_ns()
-#
-# 	assert result is True
-#
-# 	tprint(result)
-#
-# 	bprint(f'Completed in {(et - st):f} nano-seconds.')
-#
-# def test_benchmark(self):
-#
-# 	proc = subprocess.Popen(realpath('../../bench/dict/bench_find_unique_keys_from_list_of_dicts'), stdout=subprocess.PIPE)
-#
-# 	try:
-# 		outs, errs = proc.communicate(timeout=15)
-# 		print(outs)
-# 	except subprocess.TimeoutExpired:
-# 		proc.kill()
-# 		outs, errs = proc.communicate()
-# 		print(outs)
+        st = perf_counter_ns()
+        result = method_1(test_data)
+        et = perf_counter_ns()
+
+        result.sort()
+
+        assert result == ["mk1", "mk2", "mk3", "mk4", "mk5", "mk6"]
+
+        tprint(result)
+
+        bprint(f"Completed in {(et - st):f} nano-seconds.")
+
+    def test_method_2(self, test_data):
+        bprint("Find Unique Keys Method 2, Using keys(),extend(),list() and set() methods")
+
+        st = perf_counter_ns()
+        result = method_2(test_data)
+        et = perf_counter_ns()
+
+        result.sort()
+
+        assert result == ["mk1", "mk2", "mk3", "mk4", "mk5", "mk6"]
+
+        tprint(result)
+
+        bprint(f"Completed in {(et - st):f} nano-seconds.")
+
+    def test_benchmark(self):
+
+        proc = subprocess.Popen(
+            realpath("../../bench/dict/bench_find_unique_keys_from_list_of_dicts/run.sh"), stdout=subprocess.PIPE
+        )
+
+        try:
+            outs, errs = proc.communicate(timeout=15)
+            print(outs)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            outs, errs = proc.communicate()
+            print(outs)

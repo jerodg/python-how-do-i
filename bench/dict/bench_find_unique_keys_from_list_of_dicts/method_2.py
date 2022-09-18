@@ -1,3 +1,8 @@
 """
-return True if [x for x in data if x.find(substr) != -1] else False
+new_list = []
+
+for i in arr:
+    new_list.extend(list(i.keys()))
+
+return list(set(new_list))
 """
