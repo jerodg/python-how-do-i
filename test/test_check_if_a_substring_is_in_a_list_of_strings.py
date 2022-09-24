@@ -25,14 +25,7 @@ from time import perf_counter_ns
 import faker
 from pytest import fixture
 
-from find_substring_in_list_of_strings import (
-    method_0,
-    method_1,
-    method_2,
-    method_3,
-    method_4,
-    method_5,
-)
+from check_if_a_substring_is_in_a_list_of_strings import method_0, method_1, method_2, method_3, method_4, method_5
 from print_helpers import bprint, tprint
 
 
@@ -131,10 +124,7 @@ class TestFindSubstringInListOfStrings:
         bprint(f"Completed in {(et - st):f} nano-seconds.")
 
     def test_benchmark(self):
-        proc = subprocess.Popen(
-            f'poetry run {realpath("run.sh")}',
-            stdout=subprocess.PIPE,
-        )
+        proc = subprocess.Popen(f'poetry run {realpath("run.sh")}', stdout=subprocess.PIPE)
         try:
             outs, errs = proc.communicate(timeout=15)
             print(outs)

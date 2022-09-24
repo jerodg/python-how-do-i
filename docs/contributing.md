@@ -138,8 +138,8 @@ Generally, we categorize issues in the following way, which is largely derived f
   Fixing these is generally a matter of debugging the broken functionality and fixing the wrong code.
 * ["Tasks"](https://github.com/microsoft/terminal/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Task%22+) are usually new pieces of
   functionality that aren't yet implemented for the Terminal/Console. These are usually smaller features, which we believe
-	- could be a single, atomic PR
-	- Don't require much design consideration, or we've already written the spec for the larger feature they belong to.
+    - could be a single, atomic PR
+    - Don't require much design consideration, or we've already written the spec for the larger feature they belong to.
 * ["Features"](https://github.com/microsoft/terminal/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Feature%22+) are larger pieces
   of new functionality. These are usually things we believe would require larger discussion of how they should be implemented, or
   they'll require some complicated new settings. They might just be features that are composed of many individual tasks. Often

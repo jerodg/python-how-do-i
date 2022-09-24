@@ -24,16 +24,13 @@ from typing import List
 
 from pytest import fixture
 
-from find_unique_keys_from_list_of_dicts import method_0, method_1, method_2
+from discover_unique_keys_from_list_of_dicts import method_0, method_1, method_2
 from print_helpers import bprint, tprint
 
 
 @fixture()
 def test_data() -> List[dict]:
-    return [
-        {"mk1": "mk1-stuff", "mk2": "mk2-stuff", "mk3": "N/A"},
-        {"mk4": "mk4-stuff", "mk5": "mk5-stuff", "mk6": 100837363},
-    ]
+    return [{"mk1": "mk1-stuff", "mk2": "mk2-stuff", "mk3": "N/A"}, {"mk4": "mk4-stuff", "mk5": "mk5-stuff", "mk6": 100837363}]
 
 
 class TestFindUniqueKeysFromListOfDicts:
@@ -84,7 +81,7 @@ class TestFindUniqueKeysFromListOfDicts:
 
     def test_benchmark(self):
 
-        proc = subprocess.Popen(realpath("bench_find_unique_keys_from_list_of_dicts/run.sh"), stdout=subprocess.PIPE)
+        proc = subprocess.Popen(realpath("bench_discover_unique_keys_from_a_list_of_dicts/run.sh"), stdout=subprocess.PIPE)
 
         try:
             outs, errs = proc.communicate(timeout=15)
