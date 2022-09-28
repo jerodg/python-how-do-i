@@ -27,6 +27,7 @@ from os.path import realpath
 from shutil import move
 from tempfile import mkstemp
 from typing import NoReturn
+import msgpack
 
 logger = getLogger(__name__)
 DBG = logger.isEnabledFor(DEBUG)
@@ -39,7 +40,7 @@ NFO = logger.isEnabledFor(INFO)
 # - find(keys), insert, delete, many, autosave, killprotect, size, update, sort, search text(values),
 # - backups(versioning)
 
-class TinaciousDict(dict):
+class PersistentDict(dict):
     """Persistent, In-Memory dictionary
      - Auto-Discovery of input-file type
      - Output file-format: pickle, json, or csv"""
@@ -49,7 +50,7 @@ class TinaciousDict(dict):
         :param path: str
         :param mode: str; (r|c|n); r(eadonly), c(reate), n(ew)
         :param access: int; Octal
-        :param fmt: str; (csv|json|pickle)"""
+        :param fmt: str; (csv|json|pickle|msgpack)"""
         super().__init__()
         self.PATH: str = path
         self.MODE: str = mode
@@ -91,13 +92,15 @@ class TinaciousDict(dict):
         fd, path = mkstemp(suffix=b'.tmp', text=False if self.FORMAT == 'pickle' else True)
 
         try:
-            with fdopen(fd, 'wb+' if self.FORMAT == 'pickle' else 'w+') as fileobj:
+            with fdopen(fd, 'wb+' if self.FORMAT in ['pickle', 'msgpack'] else 'w+') as fileobj:
                 if self.FORMAT == 'csv':
                     csv.writer(fileobj).writerows(self.items())
                 elif self.FORMAT == 'json':
                     json.dump(self, fileobj, separators=(',', ':'))
                 elif self.FORMAT == 'pickle':
                     pickle.dump(obj=dict(self), file=fileobj, protocol=pickle.HIGHEST_PROTOCOL)
+                elif self.FORMAT == 'msgpack':
+                    msgpack.dump(self, fileobj)
                 else:
                     raise NotImplementedError(f'Unknown format: {self.FORMAT}')
         except OSError as ose:
@@ -125,8 +128,8 @@ class TinaciousDict(dict):
                 logger.info('File mode set to n(ew); not loading existing file.')
             return
         elif access(self.PATH, R_OK):
-            with open(self.PATH, 'rb' if self.FORMAT == 'pickle' else 'r') as fileobj:
-                for loader in (pickle.load, json.load, csv.reader):
+            with open(self.PATH, 'rb' if self.FORMAT in ['pickle', 'msgpack'] else 'r') as fileobj:
+                for loader in (pickle.load, json.load, csv.reader, msgpack.unpackb):
                     fileobj.seek(0)
                     try:
                         return self.update(loader(fileobj))
@@ -141,10 +144,9 @@ if __name__ == '__main__':
     # print(__doc__)
     from random import sample
 
-    with TinaciousDict(realpath('./testing_d.tdb'), fmt='json') as tdb:
+    with PersistentDict(realpath('./testing_d.td'), fmt='msgpack') as tdb:
         # print(tdb)
         n = 5
         r = 5
         tdb['nacho'] = {"ls0": [divmod(ele, r + 1) for ele in sample(range((r + 1) * (r + 1)), n)],
                         "ls1": [divmod(ele, r + 1) for ele in sample(range((r + 1) * (r + 1)), n)]}
-        # tdb.sync()  # print(x)  # print(orjson.dumps(tdb))

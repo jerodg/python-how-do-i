@@ -28,15 +28,14 @@ from typing import NoReturn
 from collections import OrderedDict
 
 
-class KillProtected(object):
-    """Context Manager Protection Fr0om Common Kill Signals"""
+class KillProtect(object):
+    """Context Manager Protection From Common Kill Signals"""
     def __init__(self):
         self.killed = False
 
     def kill_handler(self, signum, frame):
         self.killed = True
 
-    # The signal.signal() returns the previous handler
     def __enter__(self):
         self.prev_sigint = signal.signal(signal.SIGINT, self.kill_handler)
         self.prev_sigterm = signal.signal(signal.SIGTERM, self.kill_handler)
@@ -44,6 +43,7 @@ class KillProtected(object):
     def __exit__(self, type, value, traceback):
         if self.killed:
             sys.exit(0)
+
         signal.signal(signal.SIGINT, self.prev_sigint)
         signal.signal(signal.SIGTERM, self.prev_sigterm)
 
@@ -80,7 +80,7 @@ class dbj(object):
             True if saved successful.
         """
         with open(self.path, 'wt') as f:
-            with KillProtected():
+            with KillProtect():
                 json.dump(self.db, f, indent=indent)
         return True
 
