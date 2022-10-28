@@ -21,7 +21,22 @@ from os.path import realpath, exists
 import ujson
 import msgpack
 from kill_protect import KillProtect
+import logging
+from rich.logging import RichHandler
+from logging import getLogger
+from logging.config import dictConfig
+from utils import LOGGING_CONFIG
+from os.path import basename
 
+# logging.basicConfig(
+#     level="DEBUG",
+#     format="%(message)s",
+#     datefmt="[%X]",
+#     handlers=[RichHandler(rich_tracebacks=True)]
+# )
+# log = logging.getLogger(__name__)
+dictConfig(LOGGING_CONFIG)
+logger = getLogger(basename(__file__)[:-3])
 
 class TenaciousDict(dict):
 
@@ -54,12 +69,12 @@ class TenaciousDict(dict):
 
     def load(self):
         if self.db_mode == "w":
-            return
+            log.info("DbMode set to w(rite-over); loading is not necessary.")
 
         if not exists(self.db_path):
             return
 
-        m = "b" if self.db_mode in ["pickle", "msgpack"] else "t"
+        m = "b" if self.db_format in ["pickle", "msgpack"] else "t"
 
         match self.db_format:
             case "csv":
@@ -77,7 +92,7 @@ class TenaciousDict(dict):
 
     def save(self):
         with KillProtect():
-            m = "b" if self.db_mode in ["pickle", "msgpack"] else "t"
+            m = "b" if self.db_format in ["pickle", "msgpack"] else "t"
 
             match self.db_mode:
                 case "a":
@@ -93,7 +108,7 @@ class TenaciousDict(dict):
 if __name__ == '__main__':
     # print(__doc__)
     from random import sample
-    with TenaciousDict(db_path="./test.td") as td:
+    with TenaciousDict(db_path="./test.td", db_mode="w") as td:
         # n = 5
         # r = 5
         # td['nacho'] = {"ls0": [divmod(ele, r + 1) for ele in sample(range((r + 1) * (r + 1)), n)],
